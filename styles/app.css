@@ -143,10 +143,10 @@ aside a {
   color: #666;
 }
 
-/* Toggled State of information box */
+/* Toggled State of information box 
 input[type=checkbox]:checked ~ aside {
   transform: translateX(0);
-}
+}*/
 
 /* Cursor when clip name is clicked over */
 

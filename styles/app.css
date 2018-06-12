@@ -97,7 +97,7 @@ audio {
 
 .clip button {
   font-size: 1rem;
-  float: right;
+  /*float: right;*/
 }
 
 /*button.delete {

@@ -93,6 +93,11 @@ if (navigator.mediaDevices.getUserMedia) {
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
       }
 
+      uploadButton.onclick = function(e) {
+        evtTgt = e.target;
+        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+      }
+
       clipLabel.onclick = function() {
         var existingName = clipLabel.textContent;
         var newClipName = prompt('Enter a new name for your sound clip?');

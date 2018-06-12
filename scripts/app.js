@@ -66,6 +66,9 @@ if (navigator.mediaDevices.getUserMedia) {
       deleteButton.textContent = 'Delete';
       deleteButton.className = 'delete';
 
+      uploadButton.textContent = 'Upload';
+      uploadButton.className = 'upload';
+
       if(clipName === null) {
         clipLabel.textContent = 'My unnamed clip';
       } else {
@@ -75,6 +78,7 @@ if (navigator.mediaDevices.getUserMedia) {
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
       clipContainer.appendChild(deleteButton);
+      clipContainer.appendChild(uploadButton);
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;

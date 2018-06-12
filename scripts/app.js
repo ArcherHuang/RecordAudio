@@ -59,7 +59,8 @@ if (navigator.mediaDevices.getUserMedia) {
       var clipLabel = document.createElement('p');
       var audio = document.createElement('audio');
       var deleteButton = document.createElement('button');
-     
+      var uploadButton = document.createElement('uploadToServer');
+
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
       deleteButton.textContent = 'Delete';

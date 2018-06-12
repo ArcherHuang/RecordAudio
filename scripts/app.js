@@ -63,10 +63,10 @@ if (navigator.mediaDevices.getUserMedia) {
 
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
+      deleteButton.textContent = 'aaDelete';
       deleteButton.className = 'delete';
 
-      uploadButton.textContent = 'dUpload';
+      uploadButton.textContent = 'Upload';
       uploadButton.className = 'upload';
 
       if(clipName === null) {

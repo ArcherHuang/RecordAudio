@@ -95,21 +95,6 @@ if (navigator.mediaDevices.getUserMedia) {
 
       uploadButton.onclick = function(e) {
         console.log("Upload: "+ audioURL);
-        $.ajax({
-        url: "upload.php",
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(url) {
-          // $("#audio").attr("src", url);
-          // $("#audio")[0].play();
-          alert("Saved In Server. See audio element's src for URL");
-        },
-        error: function(){
-          alert("Upload fail");
-        }
-      });
       }
 
       clipLabel.onclick = function() {

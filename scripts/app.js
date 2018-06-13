@@ -96,6 +96,7 @@ if (navigator.mediaDevices.getUserMedia) {
       uploadButton.onclick = function(e) {
         evtTgt = e.target;
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+        console.log("Upload: "+ audioURL);
       }
 
       clipLabel.onclick = function() {

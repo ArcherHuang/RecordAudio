@@ -63,10 +63,10 @@ if (navigator.mediaDevices.getUserMedia) {
 
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
+      deleteButton.textContent = 'aDelete';
       deleteButton.className = 'delete';
 
-      uploadButton.textContent = 'bUpload';
+      uploadButton.textContent = 'aUpload';
       uploadButton.className = 'upload';
 
       if(clipName === null) {
@@ -81,12 +81,12 @@ if (navigator.mediaDevices.getUserMedia) {
       clipContainer.appendChild(uploadButton);
       soundClips.appendChild(clipContainer);
 
-      audio.controls = true;
+      audio.controls = false;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
-      console.log("recorder stopped");
+      console.log("recorder stopped"+ audioURL);
 
       deleteButton.onclick = function(e) {
         evtTgt = e.target;

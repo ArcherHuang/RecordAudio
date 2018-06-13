@@ -81,7 +81,7 @@ if (navigator.mediaDevices.getUserMedia) {
       clipContainer.appendChild(uploadButton);
       soundClips.appendChild(clipContainer);
 
-      audio.controls = false;
+      audio.controls = true;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);

@@ -96,6 +96,9 @@ if (navigator.mediaDevices.getUserMedia) {
 
       uploadButton.onclick = function(e) {
         console.log("Upload: "+ audioURL);
+
+        
+        
         alert("Will Upload to Server.");
       }
 

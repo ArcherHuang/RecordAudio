@@ -1,5 +1,7 @@
 // set up basic variables for app
 
+var uploadAPI = 'https://59.120.157.118:5000/api/v1.0/uploadFile'
+
 var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
@@ -53,13 +55,17 @@ if (navigator.mediaDevices.getUserMedia) {
     mediaRecorder.onstop = function(e) {
       console.log("data available after MediaRecorder.stop() called.");
 
-      var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
-      console.log(clipName);
+      // var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      // var clipName = _uuid();
+
+      // console.log(clipName);
+
       var clipContainer = document.createElement('article');
       var clipLabel = document.createElement('p');
       var audio = document.createElement('audio');
       var deleteButton = document.createElement('button');
       var uploadButton = document.createElement('button');
+      // var node = document.createElement("input");
 
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
@@ -69,11 +75,11 @@ if (navigator.mediaDevices.getUserMedia) {
       uploadButton.textContent = 'Upload';
       uploadButton.className = 'upload';
 
-      if(clipName === null) {
-        clipLabel.textContent = 'My unnamed clip';
-      } else {
-        clipLabel.textContent = clipName;
-      }
+      // if(clipName === null) {
+      //   clipLabel.textContent = 'My unnamed clip';
+      // } else {
+      //   clipLabel.textContent = clipName;
+      // }
 
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
@@ -82,7 +88,7 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      audio.controlsList = "nodownload";
+      // audio.controlsList = "nodownload";
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
@@ -96,21 +102,99 @@ if (navigator.mediaDevices.getUserMedia) {
 
       uploadButton.onclick = function(e) {
         console.log("Upload: "+ audioURL);
+        console.log(e);
 
-        
-        
+        var ss = audioURL.split("/");
+        // for (var i in ss) {
+        //   console.log(ss[i]);
+        // }
+        // var fileName = ss[3] + '.ogg'
+        // console.log("fileName: " + fileName);
+
+        // var a = document.createElement('a');
+        // document.body.appendChild(a);
+        // a.style = 'display: none';
+        // a.href = audioURL;
+        // a.download = "fileName";
+        // a.click();
+
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('GET', 'https://59.120.157.118:5000/test');
+        // xhr.onload = function(e) {
+        //   // var data = JSON.parse(this.response);
+        //   console.log("Get API:" + this.response);
+        // }
+        // xhr.send();
+
+        // var xhr1 = new XMLHttpRequest();
+        // xhr1.open('GET', audioURL, true);
+        // xhr1.responseType = 'blob';
+        // xhr1.onload = function(e) {
+        //   if (this.status == 200) {
+        //     var myBlob = this.response;
+        //     // myBlob is now the blob that the object URL pointed to.
+        //     console.log("Get Blob");
+        //     const data = new Blob(audioURL);
+        //     var xhr = new XMLHttpRequest();
+        //     var formData = new FormData()
+        //     form.append("blob",blob, filename);
+        //     formData.append('audioFile', myBlob);
+        //     xhr.open('POST', uploadAPI, true);
+        //     xhr.responseType = 'text';
+        //     xhr.onload = function(e) {
+        //     if (this.status == 200) {
+        //       console.log(this.response);
+        //     }
+
+        //   };
+        //   xhr.send(formData);
+        //   }
+        // };
+        // xhr1.send();
+
+        // node.name = "file"
+        // const data = new Blob(audioURL);
+
+        // var x = document.createElement("INPUT");
+        // x.setAttribute("type", "file");
+        // x.setAttribute("name", "file");
+
+        var xhr = new XMLHttpRequest();
+
+        // formData.append('name', _uuid() + ".ogg");
+        // formData.append("myFile", document.getElementById("myFileField").files[0]);
+        // formData.append('audioFile', data);
+
+        var data1 = "drunknight";
+        var blob1 = new Blob([data1]);
+
+        var formData = new FormData()
+        formData.append('file', blob1, fileName);
+        xhr.open('POST', uploadAPI, true);
+        // xhr.responseType = 'text';
+        // xhr.setRequestHeader( 'Content-Type', 'multipart/form-data' );
+        // xhr.setRequestHeader( 'Content-Type', 'application/octet-stream' );
+        xhr.onload = function(e) {
+          if (this.status == 200) {
+            console.log(this.response);
+          }
+
+        };
+        // xhr.send(e.target.result);
+        xhr.send(formData);
+
         alert("Will Upload to Server.");
       }
 
-      clipLabel.onclick = function() {
-        var existingName = clipLabel.textContent;
-        var newClipName = prompt('Enter a new name for your sound clip?');
-        if(newClipName === null) {
-          clipLabel.textContent = existingName;
-        } else {
-          clipLabel.textContent = newClipName;
-        }
-      }
+      // clipLabel.onclick = function() {
+      //   var existingName = clipLabel.textContent;
+      //   var newClipName = prompt('Enter a new name for your sound clip?');
+      //   if(newClipName === null) {
+      //     clipLabel.textContent = existingName;
+      //   } else {
+      //     clipLabel.textContent = newClipName;
+      //   }
+      // }
     }
 
     mediaRecorder.ondataavailable = function(e) {
@@ -179,6 +263,18 @@ function visualize(stream) {
     canvasCtx.stroke();
 
   }
+}
+
+function _uuid() {
+  var d = Date.now();
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+    d += performance.now(); //use high-precision timer if available
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
 }
 
 window.onresize = function() {
